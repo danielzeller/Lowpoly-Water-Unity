@@ -202,7 +202,7 @@ Subshader
 	Pass {
 			Blend SrcAlpha OneMinusSrcAlpha
 			ZTest LEqual
-			//ZWrite Off
+			ZWrite Off
 			Cull Off
 		
 			CGPROGRAM
