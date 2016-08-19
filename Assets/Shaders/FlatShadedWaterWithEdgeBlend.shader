@@ -17,12 +17,12 @@ Properties {
 	_BumpDirection ("Foam movement", Vector) = (1.0 ,1.0, -1.0, 1.0) 
 
 	_Foam ("Foam (intensity, cutoff)", Vector) = (0.1, 0.375, 0.0, 0.0) 
-	[MaterialToggle] _isInnerAlphaBlendOrColor("Fade inner to color or alpha?", Float) = 0
-	_SkyBoxReflection("SkyboxReflection", Range (0.0, 1.0)) = 0
+	[MaterialToggle] _isInnerAlphaBlendOrColor("Fade inner to color or alpha?", Float) = 0 
 }
 
 
-CGINCLUDE
+CGINCLUDE 
+
 
 	#include "UnityCG.cginc" 
 	#include "UnityLightingCommon.cginc" // for _LightColor0
@@ -40,8 +40,7 @@ CGINCLUDE
 	uniform float4 _BumpDirection;
  
 	uniform float4 _Foam; 
-  	float _isInnerAlphaBlendOrColor;
-  	float _SkyBoxReflection;
+  	float _isInnerAlphaBlendOrColor; 
 	#define VERTEX_WORLD_NORMAL i.normalInterpolator.xyz 
 
 
@@ -173,11 +172,7 @@ CGINCLUDE
  
         half4 baseColor = calculateBaseColor(i);
        
-        if(_SkyBoxReflection>0.0){
-	    	half4 skyData = UNITY_SAMPLE_TEXCUBE(unity_SpecCube0, i.worldRefl);
-	        half3 skyColor = DecodeHDR (skyData, unity_SpecCube0_HDR);
-	        baseColor.rgb += skyColor*_SkyBoxReflection;
-        }
+ 
 		half4 foam = Foam(_ShoreTex, i.bumpCoords * 2.0);
 		baseColor.rgb += foam.rgb * _Foam.x * (edgeBlendFactors.y + saturate(i.viewInterpolator.w - _Foam.y));
 		if( _isInnerAlphaBlendOrColor==0)

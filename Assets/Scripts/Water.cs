@@ -2,7 +2,7 @@
 using System.Collections; 
 
  
-[ExecuteInEditMode]
+ 
 public class Water : MonoBehaviour
 {
 
@@ -19,13 +19,13 @@ public class Water : MonoBehaviour
 	{
 		Camera.main.depthTextureMode |= DepthTextureMode.Depth;
 		MeshFilter mf = GetComponent<MeshFilter> ();  
-			makeMeshLowPoly (mf);
+		makeMeshLowPoly (mf);
  
 	}
 
 	MeshFilter makeMeshLowPoly (MeshFilter mf)
 	{
-		mesh = mf.mesh;//Change to sharedmesh?
+		mesh = mf.sharedMesh;//Change to sharedmesh? 
 		Vector3[] oldVerts = mesh.vertices;
 		int[] triangles = mesh.triangles;
 		Vector3[] vertices = new Vector3[triangles.Length];
